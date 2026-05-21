@@ -3,8 +3,16 @@ import React, { Component } from "react";
 export default class CardPizza extends Component {
   render(props) {
     return (
-      <div className="card my-5" style={{ width: "18rem" }}>
-        <img src={this.props.img} className="card-img-top h-50" alt="..." />
+      <div
+        className="card"
+        style={{ width: "18rem", height: "fit-content" }}
+      >
+        <img
+          src={this.props.img}
+          className="card-img-top"
+          style={{ height: "180px", objectFit: "cover" }}
+          alt={this.props.name}
+        />
         <div className="card-body">
           <h5 className="card-title fs-4 text-center">{this.props.name}</h5>
           <hr />

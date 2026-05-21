@@ -10,7 +10,7 @@ export default class Home extends Component {
     return (
       <>
         <Header />
-        <div className="d-flex flex-wrap justify-content-center gap-4">
+        <div className="d-flex flex-wrap justify-content-center gap-4 my-5">
           <CardPizza
             name="Napolitana"
             price={5950}
