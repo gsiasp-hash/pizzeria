@@ -57,7 +57,8 @@ export default class Navbar extends Component {
                 </li>
               )}
             </ul>
-            <span className="navbar-text border border-info rounded px-3 py-0 text-white fw-light">
+
+            <span className="navbar-text border border-info rounded px-3 py-0 text-white fw-light btn">
               <i className="fa-solid fa-basket-shopping"></i> Total: $
               {total.toLocaleString()}
             </span>
