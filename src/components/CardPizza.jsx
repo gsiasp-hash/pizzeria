@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class CardPizza extends Component {
   render(props) {
     return (
-      <div className="card" style={{ width: "18rem", height: "fit-content" }}>
+      <div className="card" style={{ width: "18rem"}}>
         <img
           src={this.props.img}
           className="card-img-top object-fit-cover"
