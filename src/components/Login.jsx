@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 export default function Login() {
-  const [usuario, setUsuario] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!usuario || !password) {
+    if(!email.trim() || !password.trim()) {
       alert("Por favor, completa ambos campos");
-      return (alert("Por favor, completa ambos campos"));
+      return;
     }
   };
  
@@ -20,9 +20,9 @@ export default function Login() {
         <input
           type="text"
           className="form-control mb-3"
-          placeholder="Escribe tu nombre de ususario"
-          onChange={(e) => setUsuario(e.target.value)}
-          value={usuario}
+          placeholder="Escribe tu email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <input
           type="password"
@@ -33,7 +33,7 @@ export default function Login() {
         ></input>
 
         <button className="btn btn-primary w-100" type="submit">
-          Registrarse
+          Iniciar sesión
         </button>
       </form>
     </div>
