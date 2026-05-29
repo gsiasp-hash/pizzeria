@@ -28,11 +28,11 @@ export default class CardPizza extends Component {
             </p>
 
             <div className="d-flex justify-content-around">
-              <button type="button" class="btn btn-light">
-                Ver más <i class="fa-solid fa-magnifying-glass"></i>
+              <button type="button" className="btn btn-light">
+                Ver más <i className="fa-solid fa-magnifying-glass"></i>
               </button>
-              <button type="button" class="btn btn-dark">
-                Añadir <i class="fa-solid fa-basket-shopping"></i>
+              <button type="button" className="btn btn-dark">
+                Añadir <i className="fa-solid fa-basket-shopping"></i>
               </button>
             </div>
           </div>
