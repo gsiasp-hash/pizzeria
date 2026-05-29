@@ -6,12 +6,19 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!email.trim() || !password.trim()) {
+    if (!email.trim() || !password.trim()) {
       alert("Por favor, completa ambos campos");
       return;
     }
+    else if (password.length < 6) {
+      alert("La contraseña debe tener al menos 6 caracteres");
+      return;
+    }
+    else {
+      setEmail("");
+      setPassword("");
+    }
   };
- 
 
   return (
     <div className="container my-5">
