@@ -1,8 +1,8 @@
-
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Navbar />
       <Home />
       <Login />
+      <Register />
       <Footer />
     </div>
   );
