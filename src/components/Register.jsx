@@ -26,7 +26,7 @@ export default function Register() {
 
   return (
     <div>
-      <h1 className="text-center">Register</h1>
+      <h2 className="text-center">Register</h2>
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
         <input
           type="text"
