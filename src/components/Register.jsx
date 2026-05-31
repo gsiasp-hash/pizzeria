@@ -18,6 +18,7 @@ export default function Register() {
       alert("Las contraseñas no coinciden");
       return;
     } else {
+      alert("Registro exitoso");
       setEmail("");
       setPassword("");
       setPasswordConfirm("");
