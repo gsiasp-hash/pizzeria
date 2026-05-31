@@ -15,6 +15,7 @@ export default function Login() {
       return;
     }
     else {
+      alert("Inicio de sesión exitoso");
       setEmail("");
       setPassword("");
     }
