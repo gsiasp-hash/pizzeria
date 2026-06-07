@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class CardPizza extends Component {
   render(props) {
     return (
-      <div className="card" style={{ width: "18rem"}}>
+      <div className="card" id={this.props.key} style={{ width: "18rem" }}>
         <img
           src={this.props.img}
           className="card-img-top object-fit-cover"
@@ -20,9 +20,13 @@ export default class CardPizza extends Component {
                 {this.props.ingredients.join(", ")}
               </span>
             </p>
+            <p className="list-group-item d-flex flex-column gap-1 text-center fw-bold">
+              Descripción:
+              <span className="fw-light">{this.props.desc}</span>
+            </p>
           </div>
           <hr />
-          <div className="h-25">
+          <div>
             <p className="list-group-item fw-bold text-center">
               Precio: ${this.props.price.toLocaleString()}
             </p>

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import CardPizza from "./CardPizza";
-import napolitana from "../assets/img/napolitana.jpg";
-import española from "../assets/img/española.jpg";
-import pepperoni from "../assets/img/pepperoni.jpg";
+import {pizzas} from "../assets/pizzas";
 
 export default class Home extends Component {
   render() {
@@ -11,24 +9,16 @@ export default class Home extends Component {
       <>
         <Header />
         <div className="d-flex flex-wrap justify-content-center gap-4 my-5">
-          <CardPizza
-            name="Napolitana"
-            price={5950}
-            ingredients={["mozzarella", "tomates", "jamón", "orégano"]}
-            img={napolitana}
-          />
-          <CardPizza
-            name="Española"
-            price={6950}
-            ingredients={["mozzarella", "gorgonzola", "parmesano", "provolone"]}
-            img={española}
-          />
-          <CardPizza
-            name="Pepperoni"
-            price={6950}
-            ingredients={["mozzarella", "pepperoni", "orégano"]}
-            img={pepperoni}
-          />
+          {pizzas.map((pizza) => (
+            <CardPizza
+              key={pizza.id}
+              name={pizza.name}
+              price={pizza.price}
+              ingredients={pizza.ingredients}
+              img={pizza.img}
+              desc={pizza.desc}
+            />
+          ))}
         </div>
       </>
     );
