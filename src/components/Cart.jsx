@@ -46,8 +46,8 @@ export default function Cart() {
                     alt={item.name}
                     className="rounded"
                     style={{
-                      width: "80px",
-                      height: "80px",
+                      width: "4rem",
+                      height: "4rem",
                       objectFit: "cover",
                     }}
                   />
