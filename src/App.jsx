@@ -9,10 +9,10 @@ function App() {
   return (
     <div className="min-vh-100 d-flex flex-column">
       <Navbar />
-      {/* <Home /> */}
+      <Home />
       {/* <Login />
       <Register /> */}
-      <Cart />
+      {/* <Cart /> */}
       <Footer />
     </div>
   );

@@ -1,15 +1,43 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import CardPizza from "./CardPizza";
-import {pizzas} from "../assets/pizzas";
 
-export default class Home extends Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <div className="d-flex flex-wrap justify-content-center gap-4 my-5">
-          {pizzas.map((pizza) => (
+export default function Home() {
+  const [pizzas, setPizzas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/api/pizzas")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Error al cargar pizzas: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPizzas(data);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <div className="d-flex flex-wrap justify-content-center gap-4 my-5">
+        {loading ? (
+          <p className="fs-5 text-center w-100">Cargando pizzas...</p>
+        ) : error ? (
+          <p className="fs-5 text-center text-danger w-100">{error}</p>
+        ) : pizzas.length === 0 ? (
+          <p className="fs-5 text-center w-100">No se encontraron pizzas.</p>
+        ) : (
+          pizzas.map((pizza) => (
             <CardPizza
               key={pizza.id}
               name={pizza.name}
@@ -18,9 +46,9 @@ export default class Home extends Component {
               img={pizza.img}
               desc={pizza.desc}
             />
-          ))}
-        </div>
-      </>
-    );
-  }
+          ))
+        )}
+      </div>
+    </>
+  );
 }
