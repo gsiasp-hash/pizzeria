@@ -8,7 +8,7 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/pizzas")
+    fetch("http://localhost:5000/api/pizzas")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error al cargar pizzas: ${response.status}`);
