@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import Pizza from "./pages/Pizza";
 import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -24,7 +25,8 @@ ReactDOM.createRoot(root).render(
           <Route path="/cart" element={<Cart />} />
           <Route path="/pizza/p001" element={<Pizza />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/404" element={<h1>404 Not Found</h1>} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />
