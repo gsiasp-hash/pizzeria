@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router";
 
 export default class Navbar extends Component {
   render() {
@@ -7,9 +8,9 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg py-1 bg-dark navbar-dark">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <NavLink className="navbar-brand" to="/">
             Pizzería Mamma Mia
-          </a>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -24,44 +25,45 @@ export default class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <NavLink className="nav-link active" aria-current="page" to="/">
                   Home
-                </a>
+                </NavLink>
               </li>
               {token && (
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <NavLink className="nav-link" to="/profile">
                     Profile
-                  </a>
+                  </NavLink>
                 </li>
               )}
               {token && (
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <NavLink className="nav-link" to="/logout">
                     Logout
-                  </a>
+                  </NavLink>
                 </li>
               )}
               {!token && (
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <NavLink className="nav-link" to="/login">
                     Login
-                  </a>
+                  </NavLink>
                 </li>
               )}
               {!token && (
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
+                  <NavLink className="nav-link" to="/register">
                     Register
-                  </a>
+                  </NavLink>
                 </li>
               )}
             </ul>
-
-            <span className="navbar-text border border-info rounded px-3 py-0 text-white fw-light btn">
-              <i className="fa-solid fa-basket-shopping"></i> Total: $
-              {total.toLocaleString()}
-            </span>
+            <NavLink className="nav-link" to="/cart">
+              <span className="navbar-text border border-info rounded px-3 py-0 text-white fw-light btn">
+                <i className="fa-solid fa-basket-shopping"></i> Total: $
+                {total.toLocaleString()}
+              </span>
+            </NavLink>
           </div>
         </div>
       </nav>
