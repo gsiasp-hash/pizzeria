@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { TotalContext } from "../contexts/total.context";
 
 const initialCart = [
   {
@@ -25,31 +27,25 @@ const initialCart = [
 ];
 
 export default function Cart() {
-  const [cartItems, setCartItems] = useState(initialCart);
+  const { cartItems, setCartItems, total } = useContext(TotalContext);
 
   const handleIncrement = (id) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
+    setCartItems((prev) =>
+      prev.map((item) =>
         item.id === id ? { ...item, count: item.count + 1 } : item,
       ),
     );
   };
 
   const handleDecrement = (id) => {
-    setCartItems((prevItems) =>
-      prevItems
+    setCartItems((prev) =>
+      prev
         .map((item) =>
           item.id === id ? { ...item, count: item.count - 1 } : item,
         )
         .filter((item) => item.count > 0),
     );
   };
-
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * item.count,
-    0,
-  );
-
   return (
     <div className="py-5 w-75 mx-auto d-flex flex-column gap-4">
       <h2 className="fs-4">Detalles del pedido:</h2>

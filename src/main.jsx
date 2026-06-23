@@ -15,9 +15,9 @@ import { TotalProvider } from "./contexts/total.context";
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
-  <TotalProvider>
   <BrowserRouter>
     <div className="d-flex flex-column min-vh-100">
+      <TotalProvider>
       <Navbar />
       <main className="flex-fill">
         <Routes>
@@ -32,7 +32,7 @@ ReactDOM.createRoot(root).render(
         </Routes>
       </main>
       <Footer />
+    </TotalProvider>
     </div>
   </BrowserRouter>,
-  </TotalProvider>
 );
