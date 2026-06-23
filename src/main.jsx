@@ -10,10 +10,12 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { TotalProvider } from "./contexts/total.context";
 
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
+  <TotalProvider>
   <BrowserRouter>
     <div className="d-flex flex-column min-vh-100">
       <Navbar />
@@ -32,4 +34,5 @@ ReactDOM.createRoot(root).render(
       <Footer />
     </div>
   </BrowserRouter>,
+  </TotalProvider>
 );
