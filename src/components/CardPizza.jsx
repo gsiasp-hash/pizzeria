@@ -16,7 +16,7 @@ export default function CardPizza({ name, price, ingredients, img, desc, id }) {
         <div className="card-body">
           <h5 className="card-title fs-4 text-center">{name}</h5>
           <hr />
-          <p className=" d-flex flex-column gap-1 text-center fw-bold">
+          <div className=" d-flex flex-column gap-3 text-center fw-bold">
             Ingredientes:
             <ul className="list-group list-group-flush">
               <span className="fw-light">
@@ -27,13 +27,13 @@ export default function CardPizza({ name, price, ingredients, img, desc, id }) {
                 ))}
               </span>
             </ul>
-          </p>
-
           <p className=" d-flex flex-column gap-1 text-center fw-bold">
             Descripción:
             <span className="fw-light">{desc}</span>
           </p>
         </div>
+          </div>
+
 
         <hr />
         <div className="card-body d-flex flex-column gap-3">
