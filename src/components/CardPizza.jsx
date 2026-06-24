@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TotalContext } from "../contexts/Cart.context";
+import toast,{ Toaster } from "react-hot-toast";
 
 export default function CardPizza({ name, price, ingredients, img, desc, id }) {
   const { addToCart } = React.useContext(TotalContext);
@@ -44,7 +45,10 @@ export default function CardPizza({ name, price, ingredients, img, desc, id }) {
             <button type="button" className="btn btn-light" >
               Ver más <i className="fa-solid fa-magnifying-glass"></i>
             </button>
-            <button type="button" className="btn btn-dark" onClick={() => addToCart(id)}>
+            <button type="button" className="btn btn-dark" onClick={() => {
+              addToCart(id);
+              toast.success("Pizza añadida al carrito");
+            }}>
               Añadir <i className="fa-solid fa-basket-shopping"></i>
             </button>
           </div>

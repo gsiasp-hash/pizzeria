@@ -11,31 +11,33 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { TotalProvider } from "./contexts/Cart.context";
-import {PizzasProvider} from "./contexts/Pizzas.context";
+import { PizzasProvider } from "./contexts/Pizzas.context";
+import { Toaster } from "react-hot-toast";
 
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
     <div className="d-flex flex-column min-vh-100">
-    <PizzasProvider>
-      <TotalProvider>
-      <Navbar />
-      <main className="flex-fill">
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/pizza/p001" element={<Pizza />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
-    </TotalProvider>
-    </PizzasProvider>
+      <PizzasProvider>
+        <TotalProvider>
+          <Toaster position="bottom-right" reverseOrder={false} />
+          <Navbar />
+          <main className="flex-fill">
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/pizza/p001" element={<Pizza />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </TotalProvider>
+      </PizzasProvider>
     </div>
   </BrowserRouter>,
 );
