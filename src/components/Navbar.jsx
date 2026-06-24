@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router";
 import { useContext } from "react";
-import { TotalContext } from "../contexts/total.context";
+import { TotalContext } from "../contexts/Cart.context";
 
 export default function Navbar() {
   const token = false;

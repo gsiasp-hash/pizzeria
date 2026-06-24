@@ -1,14 +1,14 @@
 import {createContext, useState, useEffect} from 'react';
 
-const PizzasContext = createContext();
+export const PizzasContext = createContext();
 
-function PizzasProvider({children}) {
+export function PizzasProvider({children}) {
       const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/pizzas")
+    fetch("http://localhost:5001/api/pizzas")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error al cargar pizzas: ${response.status}`);

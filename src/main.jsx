@@ -10,13 +10,15 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import { TotalProvider } from "./contexts/total.context";
+import { TotalProvider } from "./contexts/Cart.context";
+import {PizzasProvider} from "./contexts/Pizzas.context";
 
 const root = document.getElementById("root");
 
 ReactDOM.createRoot(root).render(
   <BrowserRouter>
     <div className="d-flex flex-column min-vh-100">
+    <PizzasProvider>
       <TotalProvider>
       <Navbar />
       <main className="flex-fill">
@@ -33,6 +35,7 @@ ReactDOM.createRoot(root).render(
       </main>
       <Footer />
     </TotalProvider>
+    </PizzasProvider>
     </div>
   </BrowserRouter>,
 );
