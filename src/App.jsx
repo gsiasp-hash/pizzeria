@@ -16,7 +16,7 @@ import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column min-vh-100">
+      <div className="d-flex flex-column min-vh-screen">
         <PizzasProvider>
           <TotalProvider>
             <Toaster position="bottom-right" reverseOrder={false} />
