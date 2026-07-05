@@ -1,10 +1,11 @@
-import React, { Component } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export default function Register() {
       setEmail("");
       setPassword("");
       setPasswordConfirm("");
+      navigate("/login");
     }
   };
 

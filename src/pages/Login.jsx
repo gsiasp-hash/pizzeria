@@ -1,23 +1,27 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router";
+import UserContext from "../contexts/User.context";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
       alert("Por favor, completa ambos campos");
       return;
-    }
-    else if (password.length < 6) {
+    } else if (password.length < 6) {
       alert("La contraseña debe tener al menos 6 caracteres");
       return;
-    }
-    else {
+    } else {
+      login();
       alert("Inicio de sesión exitoso");
       setEmail("");
       setPassword("");
+      navigate("/");
     }
   };
 
