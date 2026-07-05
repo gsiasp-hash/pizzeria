@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { NavLink } from "react-router";
 import { useContext } from "react";
 import { TotalContext } from "../contexts/Cart.context";
+import { UserContext } from "../contexts/User.context";
 
 export default function Navbar() {
-  const token = false;
+  const { user, isLoggedIn } = useContext(UserContext);
   const { total } = useContext(TotalContext);
   return (
     <nav className="navbar navbar-expand-lg py-1 bg-dark navbar-dark">
@@ -30,28 +31,28 @@ export default function Navbar() {
                 Home
               </NavLink>
             </li>
-            {token && (
+            {isLoggedIn && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">
                   Profile
                 </NavLink>
               </li>
             )}
-            {token && (
+            {isLoggedIn && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/logout">
                   Logout
                 </NavLink>
               </li>
             )}
-            {!token && (
+            {!isLoggedIn && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/login">
                   Login
                 </NavLink>
               </li>
             )}
-            {!token && (
+            {!isLoggedIn && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/register">
                   Register
