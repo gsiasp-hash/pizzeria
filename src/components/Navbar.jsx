@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { NavLink } from "react-router";
 import { useContext } from "react";
 import { TotalContext } from "../contexts/Cart.context";
-import { UserContext } from "../contexts/User.context";
+import UserContext from "../contexts/User.context";
 
 export default function Navbar() {
-  const { user, isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, logout } = useContext(UserContext);
   const { total } = useContext(TotalContext);
   return (
     <nav className="navbar navbar-expand-lg py-1 bg-dark navbar-dark">
@@ -40,7 +40,14 @@ export default function Navbar() {
             )}
             {isLoggedIn && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/logout">
+                <NavLink
+                  className="nav-link"
+                  to="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    logout();
+                  }}
+                >
                   Logout
                 </NavLink>
               </li>
