@@ -11,16 +11,16 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { TotalProvider } from "./contexts/Cart.context";
 import { PizzasProvider } from "./contexts/Pizzas.context";
-import { Toaster } from "react-hot-toast";
 import { UserProvider } from "./contexts/User.context";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="d-flex flex-column min-vh-100">
-        <PizzasProvider>
-          <TotalProvider>
-            <UserProvider>
+        <UserProvider>
+          <PizzasProvider>
+            <TotalProvider>
               <Toaster position="bottom-right" reverseOrder={false} />
               <Navbar />
 
@@ -30,7 +30,7 @@ function App() {
                   <Route path="/register" element={<Register />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/cart" element={<Cart />} />
-                  <Route path="/pizza/p001" element={<Pizza />} />
+                  <Route path="/pizza/:id" element={<Pizza />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/404" element={<NotFound />} />
                   <Route path="*" element={<NotFound />} />
@@ -38,9 +38,9 @@ function App() {
               </div>
 
               <Footer />
-            </UserProvider>
-          </TotalProvider>
-        </PizzasProvider>
+            </TotalProvider>
+          </PizzasProvider>
+        </UserProvider>
       </div>
     </BrowserRouter>
   );
