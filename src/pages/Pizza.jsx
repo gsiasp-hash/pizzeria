@@ -1,14 +1,48 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
 import { TotalContext } from "../contexts/Cart.context";
-import { PizzasContext } from "../contexts/Pizzas.context";
 import toast from "react-hot-toast";
 
 export default function Pizza() {
   const { id } = useParams();
-  const { pizzas, loading, error } = useContext(PizzasContext);
-  const pizza = pizzas.find((p) => p.id === id);
+  const [pizza, setPizza] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { addToCart } = useContext(TotalContext);
+
+  useEffect(() => {
+    if (!id) return;
+
+    let active = true;
+    const fetchPizza = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(`http://localhost:5000/api/pizzas/${id}`);
+        if (!response.ok) {
+          throw new Error(`No se encontró la pizza: ${response.status}`);
+        }
+        const data = await response.json();
+        if (active) {
+          setPizza(data);
+        }
+      } catch (err) {
+        if (active) {
+          setError(err instanceof Error ? err.message : String(err));
+        }
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchPizza();
+    return () => {
+      active = false;
+    };
+  }, [id]);
 
   if (loading) {
     return <div className="container py-5">Cargando pizza...</div>;
