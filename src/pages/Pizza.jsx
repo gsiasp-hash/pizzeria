@@ -1,35 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { useParams, Link } from "react-router";
+import { TotalContext } from "../contexts/Cart.context";
+import { PizzasContext } from "../contexts/Pizzas.context";
+import toast from "react-hot-toast";
 
 export default function Pizza() {
   const { id } = useParams();
-  const [pizza, setPizza] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (!id) return;
-
-    setLoading(true);
-    setError(null);
-
-    fetch(`http://localhost:5000/api/pizzas/${id}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`No se encontró la pizza: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPizza(data);
-      })
-      .catch((err) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [id]);
+  const { pizzas, loading, error } = useContext(PizzasContext);
+  const pizza = pizzas.find((p) => p.id === id);
+  const { addToCart } = useContext(TotalContext);
 
   if (loading) {
     return <div className="container py-5">Cargando pizza...</div>;
@@ -85,9 +64,16 @@ export default function Pizza() {
               <Link to="/" className="btn btn-primary me-2">
                 Volver al menú
               </Link>
-              <Link to="/cart" className="btn btn-dark">
-                Ir al carrito
-              </Link>
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => {
+                  toast.success("Pizza añadida al carrito");
+                  addToCart(pizza.id);
+                }}
+              >
+                Añadir al carrito
+              </button>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { TotalContext } from "../contexts/Cart.context";
-import  toast  from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export default function Cart() {
   const { cartItems, setCartItems, total } = useContext(TotalContext);
@@ -59,9 +58,10 @@ export default function Cart() {
                   <button
                     type="button"
                     className="btn btn-outline-danger"
-                    onClick={() =>{ 
-                      toast.error("Pizza eliminada del carrito")
-                      handleDecrement(item.id)}}
+                    onClick={() => {
+                      toast.error("Pizza eliminada del carrito");
+                      handleDecrement(item.id);
+                    }}
                   >
                     -
                   </button>
@@ -71,9 +71,8 @@ export default function Cart() {
                     className="btn btn-outline-primary"
                     onClick={() => {
                       toast.success("Pizza añadida al carrito");
-                      handleIncrement(item.id)}
-                     
-                    }
+                      handleIncrement(item.id);
+                    }}
                   >
                     +
                   </button>
