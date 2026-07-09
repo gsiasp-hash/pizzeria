@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { TotalContext } from "../contexts/Cart.context";
 import toast from "react-hot-toast";
+import UserContext from "../contexts/User.context";
 
 export default function Cart() {
   const { cartItems, setCartItems, total } = useContext(TotalContext);
+  const { isLoggedIn } = useContext(UserContext);
 
   const handleIncrement = (id) => {
     setCartItems((prev) =>
@@ -84,7 +86,17 @@ export default function Cart() {
 
         <div className="d-flex flex-column align-items-end gap-3 mt-4">
           <h3>Total: ${total.toLocaleString()}</h3>
-          <button className="btn btn-dark">Pagar</button>
+          {!isLoggedIn && (
+            <button className="btn btn-dark disabled">Pagar</button>
+          )}
+          {isLoggedIn && (
+            <button
+              className="btn btn-dark"
+              onClick={() => toast.success("Pago realizado con éxito")}
+            >
+              Pagar
+            </button>
+          )}
         </div>
       </div>
     </div>
