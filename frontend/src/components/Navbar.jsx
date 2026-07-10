@@ -27,7 +27,7 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/">
+              <NavLink className="nav-link" aria-current="page" to="/">
                 Home
               </NavLink>
             </li>
@@ -42,7 +42,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
-                  to="#"
+                  to="/"
                   onClick={(e) => {
                     e.preventDefault();
                     logout();
