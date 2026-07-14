@@ -15,8 +15,6 @@ export const UserProvider = ({ children }) => {
       setToken(saved);
       setIsLoggedIn(true);
     }
-    // attempt to fetch profile if token exists on load
-    // fetchProfile will run in the other effect when token is set
   }, []);
 
   useEffect(() => {
@@ -59,23 +57,27 @@ export const UserProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const data = await request("/auth/login", { email: email, password: password });
+    const data = await request("/auth/login", {
+      email: email,
+      password: password,
+    });
     if (data.token) {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       setIsLoggedIn(true);
-      // user will be fetched by effect
     }
     return data;
   };
 
   const register = async (email, password) => {
-    const data = await request("/auth/register", { email: email, password: password });
+    const data = await request("/auth/register", {
+      email: email,
+      password: password,
+    });
     if (data.token) {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       setIsLoggedIn(true);
-      // user will be fetched by effect
     }
     return data;
   };
@@ -88,7 +90,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ token, isLoggedIn, user, login, register, logout }}>
+    <UserContext.Provider
+      value={{ token, isLoggedIn, user, login, register, logout }}
+    >
       {children}
     </UserContext.Provider>
   );

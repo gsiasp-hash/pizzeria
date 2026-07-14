@@ -5,7 +5,35 @@ import UserContext from "../contexts/User.context";
 
 export default function Cart() {
   const { cartItems, setCartItems, total } = useContext(TotalContext);
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, token } = useContext(UserContext);
+
+  const handleCheckout = async () => {
+    if (!isLoggedIn) {
+      toast.error("Necesitas iniciar sesión para pagar");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ cart: cartItems }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Error en el servidor");
+      }
+
+      toast.success("Pago realizado con éxito");
+      setCartItems([]);
+    } catch (err) {
+      toast.error(err.message || "Error al procesar el pago");
+    }
+  };
 
   const handleIncrement = (id) => {
     setCartItems((prev) =>
@@ -90,10 +118,7 @@ export default function Cart() {
             <button className="btn btn-dark disabled">Pagar</button>
           )}
           {isLoggedIn && (
-            <button
-              className="btn btn-dark"
-              onClick={() => toast.success("Pago realizado con éxito")}
-            >
+            <button className="btn btn-dark" onClick={handleCheckout}>
               Pagar
             </button>
           )}
