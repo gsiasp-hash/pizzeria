@@ -1,29 +1,46 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import UserContext from "../contexts/User.context";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { register } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
       alert("Por favor, completa ambos campos");
       return;
-    } else if (password.length < 6) {
+    }
+    if (password.length < 6) {
       alert("La contraseña debe tener al menos 6 caracteres");
       return;
-    } else if (passwordConfirm !== password) {
+    }
+    if (passwordConfirm !== password) {
       alert("Las contraseñas no coinciden");
       return;
-    } else {
-      alert("Registro exitoso");
-      setEmail("");
-      setPassword("");
-      setPasswordConfirm("");
-      navigate("/login");
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await register(email, password);
+      if (res?.token) {
+        alert("Registro exitoso");
+        setEmail("");
+        setPassword("");
+        setPasswordConfirm("");
+        navigate("/");
+      } else {
+        alert(res?.error || "Error al registrarse");
+      }
+    } catch (err) {
+      alert(err.message || "Error al registrarse");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -32,7 +49,7 @@ export default function Register() {
       <h2 className="text-center">Register</h2>
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
         <input
-          type="text"
+          type="email"
           className="form-control mb-3"
           placeholder="Escribe tu email"
           onChange={(e) => setEmail(e.target.value)}
@@ -44,16 +61,20 @@ export default function Register() {
           placeholder="Escribe tu contraseña"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
-        ></input>
+        />
         <input
           type="password"
           className="form-control mb-3"
           placeholder="Confirma tu contraseña"
           onChange={(e) => setPasswordConfirm(e.target.value)}
           value={passwordConfirm}
-        ></input>
-        <button className="btn btn-primary w-100" type="submit">
-          Registrarse
+        />
+        <button
+          className="btn btn-primary w-100"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Enviando..." : "Registrarse"}
         </button>
       </form>
     </div>

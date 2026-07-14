@@ -7,6 +7,7 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("token");
@@ -14,7 +15,37 @@ export const UserProvider = ({ children }) => {
       setToken(saved);
       setIsLoggedIn(true);
     }
+    // attempt to fetch profile if token exists on load
+    // fetchProfile will run in the other effect when token is set
   }, []);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!token) {
+        setUser(null);
+        return;
+      }
+      try {
+        const res = await fetch(`${API_BASE}/auth/me`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await res.json();
+        if (res.ok) {
+          setUser(data);
+        } else {
+          setUser(null);
+        }
+      } catch (err) {
+        setUser(null);
+      }
+    };
+
+    fetchProfile();
+  }, [token]);
 
   const request = async (path, body) => {
     const res = await fetch(`${API_BASE}${path}`, {
@@ -33,6 +64,7 @@ export const UserProvider = ({ children }) => {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       setIsLoggedIn(true);
+      // user will be fetched by effect
     }
     return data;
   };
@@ -43,6 +75,7 @@ export const UserProvider = ({ children }) => {
       localStorage.setItem("token", data.token);
       setToken(data.token);
       setIsLoggedIn(true);
+      // user will be fetched by effect
     }
     return data;
   };
@@ -51,10 +84,11 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("token");
     setToken(null);
     setIsLoggedIn(false);
+    setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{ token, isLoggedIn,setIsLoggedIn, login, register, logout }}>
+    <UserContext.Provider value={{ token, isLoggedIn, user, login, register, logout }}>
       {children}
     </UserContext.Provider>
   );
