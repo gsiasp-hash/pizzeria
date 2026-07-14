@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 const fetchLogin = async (email, password) => {
-  const response = await fetch("http://localhost:5000/api/users/login", {
+  const response = await fetch("http://localhost:5000/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -12,7 +12,7 @@ const fetchLogin = async (email, password) => {
 };
 
 const fetchRegister = async (email, password) => {
-  const response = await fetch("http://localhost:5000/api/users/register", {
+  const response = await fetch("http://localhost:5000/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
