@@ -12,27 +12,31 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
-      alert("Por favor, completa ambos campos");
+      document.getElementById("password-error").textContent =
+        "Por favor, completa ambos campos";
       return;
     }
     if (password.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres");
+      document.getElementById("password-error").textContent =
+        "La contraseña debe tener al menos 6 caracteres";
       return;
     }
 
     setIsSubmitting(true);
     try {
-      const res = await login(email, password); // pasar credenciales
+      const res = await login(email, password);
       if (res?.token) {
         alert("Inicio de sesión exitoso");
         setEmail("");
         setPassword("");
         navigate("/");
       } else {
-        alert(res?.error || "Error al iniciar sesión");
+        document.getElementById("password-error").textContent =
+          res?.error || "Error al iniciar sesión";
       }
     } catch (err) {
-      alert(err.message || "Error al iniciar sesión");
+      document.getElementById("password-error").textContent =
+        err.message || "Error al iniciar sesión";
     } finally {
       setIsSubmitting(false);
     }
@@ -56,6 +60,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
+        <p id="password-error" className="text-danger text-center"></p>
         <button
           className="btn btn-primary w-100"
           type="submit"

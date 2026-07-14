@@ -13,15 +13,18 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email.trim() || !password.trim()) {
-      alert("Por favor, completa ambos campos");
+      document.getElementById("password-error").textContent =
+        "Por favor, completa ambos campos";
       return;
     }
     if (password.length < 6) {
-      alert("La contraseña debe tener al menos 6 caracteres");
+      document.getElementById("password-error").textContent =
+        "La contraseña debe tener al menos 6 caracteres";
       return;
     }
     if (passwordConfirm !== password) {
-      alert("Las contraseñas no coinciden");
+      document.getElementById("password-error").textContent =
+        "Las contraseñas no coinciden";
       return;
     }
 
@@ -69,6 +72,7 @@ export default function Register() {
           onChange={(e) => setPasswordConfirm(e.target.value)}
           value={passwordConfirm}
         />
+        <p id="password-error" className="text-danger text-center"></p>
         <button
           className="btn btn-primary w-100"
           type="submit"
