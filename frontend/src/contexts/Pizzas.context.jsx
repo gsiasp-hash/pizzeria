@@ -1,4 +1,5 @@
 import {createContext, useState, useEffect} from 'react';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const PizzasContext = createContext();
 
@@ -8,7 +9,7 @@ export function PizzasProvider({children}) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/pizzas")
+    fetch(`${API_URL}/api/pizzas`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error al cargar pizzas: ${response.status}`);
