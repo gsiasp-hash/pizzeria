@@ -115,7 +115,9 @@ export default function Cart() {
         <div className="d-flex flex-column align-items-end gap-3 mt-4">
           <h3>Total: ${total.toLocaleString()}</h3>
           {!isLoggedIn && (
-            <button className="btn btn-dark disabled">Pagar</button>
+            <button className="btn btn-dark disabled" onClick ={() => toast.info("Por favor, inicia sesión para continuar con el pago")}>
+              Pagar
+            </button>
           )}
           {isLoggedIn && (
             <button className="btn btn-dark" onClick={handleCheckout}>
