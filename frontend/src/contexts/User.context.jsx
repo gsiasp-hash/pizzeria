@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
         return;
       }
       try {
-        const res = await fetch(`${API_BASE}/auth/me`, {
+        const res = await fetch(`${API_BASE}/api/auth/me`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const data = await request("/auth/login", {
+    const data = await request("/api/auth/login", {
       email: email,
       password: password,
     });
@@ -70,7 +70,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const register = async (email, password) => {
-    const data = await request("/auth/register", {
+    const data = await request("/api/auth/register", {
       email: email,
       password: password,
     });

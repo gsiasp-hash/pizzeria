@@ -14,7 +14,7 @@ export default function Cart() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/checkouts", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/checkouts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

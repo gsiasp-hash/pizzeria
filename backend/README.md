@@ -5,7 +5,7 @@ API para consumir un servicio de Auth con JWT.
 ## Instalación
 
 ```sh
-npm install
+npm installtengo el
 ```
 
 ## Uso
