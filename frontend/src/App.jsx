@@ -13,6 +13,7 @@ import { TotalProvider } from "./contexts/Cart.context";
 import { PizzasProvider } from "./contexts/Pizzas.provider";
 import UserContext, { UserProvider } from "./contexts/User.context";
 import { Toaster } from "react-hot-toast";
+import { Analytics } from '@vercel/analytics/next';
 
 function AuthChecking() {
   return (
@@ -94,6 +95,7 @@ function App() {
           </PizzasProvider>
         </UserProvider>
       </div>
+      <Analytics/>
     </BrowserRouter>
   );
 }
