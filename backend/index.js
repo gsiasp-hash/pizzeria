@@ -32,16 +32,16 @@ app.use("/api/auth", authRoute);
 app.use("/api/pizzas", pizzaRoute);
 app.use("/api/checkouts", checkoutRoute);
 app.use((_, res) => {
-  res.status(404).json({ error: "Not Found" });
+  res.status(404).json({ error: "Ruta no encontrada" });
 });
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
   if (err?.message?.includes("not allowed by CORS")) {
-    return res.status(403).json({ error: "Origin not allowed" });
+    return res.status(403).json({ error: "Origen no permitido" });
   }
   console.error(err);
-  return res.status(500).json({ error: "Server error" });
+  return res.status(500).json({ error: "Error del servidor" });
 });
 
 const PORT = process.env.PORT || 5000;

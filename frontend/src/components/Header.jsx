@@ -11,7 +11,7 @@ export default function Header() {
       <div className="absolute inset-0 bg-gradient-to-r from-tomato-900/85 via-tomato-700/65 to-cheese-500/55" />
       <div className="relative z-10 flex flex-col items-center gap-3 px-4 text-center text-cream-50">
         <h1 className="text-4xl font-extrabold tracking-tight drop-shadow-sm sm:text-5xl">
-          ¡Pizzería Mamma Mia!
+          ¡Pizzería Gino!
         </h1>
         <p className="max-w-xl text-base font-semibold text-cream-100 sm:text-lg">
           ¡Tenemos las mejores pizzas que podrás encontrar!

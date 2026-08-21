@@ -72,7 +72,7 @@ export default function Navbar() {
             <Pizza className="size-5" />
           </span>
           <span className="text-lg font-extrabold tracking-tight text-crust-950 sm:text-xl">
-            Pizzería Mamma Mia
+            Pizzería Gino
           </span>
         </NavLink>
 

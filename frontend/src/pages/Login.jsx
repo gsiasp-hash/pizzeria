@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 import UserContext from "../contexts/User.context";
 
 export default function Login() {
@@ -26,7 +27,7 @@ export default function Login() {
     try {
       const res = await login(email, password);
       if (res?.email) {
-        alert("Inicio de sesión exitoso");
+        toast.success("Inicio de sesión exitoso");
         setEmail("");
         setPassword("");
         navigate("/");

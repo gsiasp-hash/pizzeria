@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 import UserContext from "../contexts/User.context";
 
 export default function Register() {
@@ -32,16 +33,18 @@ export default function Register() {
     try {
       const res = await register(email, password);
       if (res?.email) {
-        alert("Registro exitoso");
+        toast.success("Registro exitoso");
         setEmail("");
         setPassword("");
         setPasswordConfirm("");
         navigate("/");
       } else {
-        alert(res?.error || "Error al registrarse");
+        document.getElementById("password-error").textContent =
+          res?.error || "Error al registrarse";
       }
     } catch (err) {
-      alert(err.message || "Error al registrarse");
+      document.getElementById("password-error").textContent =
+        err.message || "Error al registrarse";
     } finally {
       setIsSubmitting(false);
     }

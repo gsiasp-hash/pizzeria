@@ -18,27 +18,27 @@ const login = async (req, res) => {
     const { email = "", password = "" } = req.body;
 
     if (!email.trim() || !password.trim()) {
-      return res.status(400).json({ error: "Email and password are required" });
+      return res.status(400).json({ error: "Email y contraseña son obligatorios" });
     }
 
     if (!isValidEmail(email)) {
-      return res.status(400).json({ error: "Invalid email" });
+      return res.status(400).json({ error: "Email inválido" });
     }
 
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ error: "Password must be at least 6 characters" });
+        .json({ error: "La contraseña debe tener al menos 6 caracteres" });
     }
 
     const user = await authModel.getUserByEmail(email);
 
     if (!user) {
-      return res.status(400).json({ error: "User not found" });
+      return res.status(400).json({ error: "Usuario no encontrado" });
     }
 
     if (user.password !== password) {
-      return res.status(400).json({ error: "Invalid password" });
+      return res.status(400).json({ error: "Contraseña incorrecta" });
     }
 
     const payload = { email, id: user.id };
@@ -48,7 +48,7 @@ const login = async (req, res) => {
     return res.json({ email });
   } catch (error) {
     // console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: "Error del servidor" });
   }
 };
 
@@ -57,22 +57,22 @@ const register = async (req, res) => {
     const { email = "", password = "" } = req.body;
 
     if (!email.trim() || !password.trim()) {
-      return res.status(400).json({ error: "Email and password are required" });
+      return res.status(400).json({ error: "Email y contraseña son obligatorios" });
     }
 
     if (!isValidEmail(email)) {
-      return res.status(400).json({ error: "Invalid email" });
+      return res.status(400).json({ error: "Email inválido" });
     }
 
     if (password.length < 6) {
       return res
         .status(400)
-        .json({ error: "Password must be at least 6 characters" });
+        .json({ error: "La contraseña debe tener al menos 6 caracteres" });
     }
 
     const user = await authModel.getUserByEmail(email);
     if (user) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.status(400).json({ error: "El usuario ya existe" });
     }
     const newUser = { email, password, id: nanoid() };
     await authModel.addUser(newUser);
@@ -84,7 +84,7 @@ const register = async (req, res) => {
     return res.json({ email });
   } catch (error) {
     // console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: "Error del servidor" });
   }
 };
 
@@ -94,7 +94,7 @@ const logout = (_req, res) => {
     sameSite: COOKIE_OPTIONS.sameSite,
     secure: COOKIE_OPTIONS.secure,
   });
-  return res.json({ message: "Logged out" });
+  return res.json({ message: "Sesión cerrada" });
 };
 
 const me = async (req, res) => {
@@ -104,7 +104,7 @@ const me = async (req, res) => {
     return res.json({ email, id: user.id });
   } catch (error) {
     // console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: "Error del servidor" });
   }
 };
 
