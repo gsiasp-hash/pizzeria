@@ -4,6 +4,15 @@ import { nanoid } from "nanoid";
 import { authModel } from "../models/auth.model.js";
 import { isValidEmail } from "../utils/validators/email.validate.js";
 
+const isProduction = process.env.NODE_ENV === "production";
+
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  sameSite: isProduction ? "none" : "lax",
+  secure: isProduction,
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
 const login = async (req, res) => {
   try {
     const { email = "", password = "" } = req.body;
@@ -35,7 +44,8 @@ const login = async (req, res) => {
     const payload = { email, id: user.id };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
 
-    return res.json({ email, token });
+    res.cookie("token", token, COOKIE_OPTIONS);
+    return res.json({ email });
   } catch (error) {
     // console.log(error);
     return res.status(500).json({ error: "Server error" });
@@ -70,11 +80,21 @@ const register = async (req, res) => {
     const payload = { email, id: newUser.id };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
 
-    return res.json({ email, token });
+    res.cookie("token", token, COOKIE_OPTIONS);
+    return res.json({ email });
   } catch (error) {
     // console.log(error);
     return res.status(500).json({ error: "Server error" });
   }
+};
+
+const logout = (_req, res) => {
+  res.clearCookie("token", {
+    httpOnly: true,
+    sameSite: COOKIE_OPTIONS.sameSite,
+    secure: COOKIE_OPTIONS.secure,
+  });
+  return res.json({ message: "Logged out" });
 };
 
 const me = async (req, res) => {
@@ -91,5 +111,6 @@ const me = async (req, res) => {
 export const authController = {
   login,
   register,
+  logout,
   me,
 };

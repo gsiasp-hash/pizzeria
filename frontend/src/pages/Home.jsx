@@ -1,23 +1,27 @@
-import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
-import { useContext } from "react";
 import { PizzasContext } from "../contexts/Pizzas.context";
 
 export default function Home() {
-
-  const { pizzas, loading, error} = useContext(PizzasContext);
+  const { pizzas, loading, error } = useContext(PizzasContext);
 
   return (
     <>
       <Header />
-      <div className="d-flex flex-wrap justify-content-center gap-4 my-5">
+      <main className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-3">
         {loading ? (
-          <p className="fs-5 text-center w-100">Cargando pizzas...</p>
+          <p className="col-span-full text-center text-lg font-bold text-crust-500">
+            Cargando pizzas...
+          </p>
         ) : error ? (
-          <p className="fs-5 text-center text-danger w-100">{error}</p>
+          <p className="col-span-full text-center text-lg font-bold text-tomato-600">
+            {error}
+          </p>
         ) : pizzas.length === 0 ? (
-          <p className="fs-5 text-center w-100">No se encontraron pizzas.</p>
+          <p className="col-span-full text-center text-lg font-bold text-crust-500">
+            No se encontraron pizzas.
+          </p>
         ) : (
           pizzas.map((pizza) => (
             <CardPizza
@@ -31,7 +35,7 @@ export default function Home() {
             />
           ))
         )}
-      </div>
+      </main>
     </>
   );
 }

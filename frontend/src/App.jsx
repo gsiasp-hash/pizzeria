@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import Register from "./pages/Register";
@@ -10,31 +10,52 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { TotalProvider } from "./contexts/Cart.context";
-import { PizzasProvider } from "./contexts/Pizzas.context";
+import { PizzasProvider } from "./contexts/Pizzas.provider";
 import UserContext, { UserProvider } from "./contexts/User.context";
 import { Toaster } from "react-hot-toast";
 
+function AuthChecking() {
+  return (
+    <div className="flex grow items-center justify-center py-24">
+      <div className="size-10 animate-spin rounded-full border-4 border-cream-300 border-t-tomato-600" />
+    </div>
+  );
+}
+
 function RequireAuth({ children }) {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, isCheckingAuth } = useContext(UserContext);
+  if (isCheckingAuth) return <AuthChecking />;
   return isLoggedIn ? children : <Navigate to="/login" replace />;
 }
 
 function PublicRoute({ children }) {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, isCheckingAuth } = useContext(UserContext);
+  if (isCheckingAuth) return null;
   return !isLoggedIn ? children : <Navigate to="/" replace />;
 }
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="d-flex flex-column min-vh-100">
+      <div className="flex min-h-screen flex-col">
         <UserProvider>
           <PizzasProvider>
             <TotalProvider>
-              <Toaster position="bottom-right" reverseOrder={false} />
+              <Toaster
+                position="bottom-right"
+                reverseOrder={false}
+                toastOptions={{
+                  style: {
+                    fontFamily: "Nunito, sans-serif",
+                    fontWeight: 700,
+                    borderRadius: "1rem",
+                    border: "1px solid #fdf1e0",
+                  },
+                }}
+              />
               <Navbar />
 
-              <div className="flex-grow-1">
+              <div className="grow">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route

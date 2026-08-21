@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
+import { ArrowLeft, ShoppingBasket } from "lucide-react";
 import { TotalContext } from "../contexts/Cart.context";
 import toast from "react-hot-toast";
 
@@ -47,73 +48,89 @@ export default function Pizza() {
   }, [id]);
 
   if (loading) {
-    return <div className="container py-5">Cargando pizza...</div>;
-  }
-
-  if (error) {
     return (
-      <div className="container py-5">
-        <p className="text-danger">{error}</p>
-        <Link to="/" className="btn btn-primary">
-          Volver al menú
-        </Link>
-      </div>
+      <main className="mx-auto max-w-6xl px-4 py-16 text-center text-lg font-bold text-crust-500">
+        Cargando pizza...
+      </main>
     );
   }
 
-  if (!pizza) {
+  if (error || !pizza) {
     return (
-      <div className="container py-5">
-        <p className="text-center">No hay información de la pizza.</p>
-        <Link to="/" className="btn btn-primary">
-          Volver al menú
+      <main className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-16 text-center">
+        <p className="text-lg font-bold text-tomato-600">
+          {error || "No hay información de la pizza."}
+        </p>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 rounded-full bg-tomato-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-tomato-200 transition-colors hover:bg-tomato-700"
+        >
+          <ArrowLeft className="size-4" /> Volver al menú
         </Link>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <div className="card mb-4">
+    <main className="mx-auto w-full max-w-4xl px-4 py-12">
+      <article className="overflow-hidden rounded-3xl border border-cream-200 bg-white shadow-xl shadow-cheese-100">
+        <div className="grid md:grid-cols-2">
+          <div className="relative h-64 md:h-full">
             <img
               src={pizza.img}
-              className="card-img-top object-fit-cover"
-              style={{ height: "360px" }}
               alt={pizza.name}
+              className="absolute inset-0 h-full w-full object-cover"
             />
-            <div className="card-body">
-              <h2 className="card-title">{pizza.name}</h2>
-              <p className="card-text fw-semibold">
-                Precio: ${pizza.price.toLocaleString()}
+          </div>
+
+          <div className="flex flex-col gap-5 p-8">
+            <h1 className="text-3xl font-extrabold capitalize tracking-tight text-crust-950">
+              {pizza.name}
+            </h1>
+
+            <p className="text-3xl font-extrabold text-tomato-600">
+              ${pizza.price.toLocaleString()}
+            </p>
+
+            <p className="leading-relaxed text-crust-500">{pizza.desc}</p>
+
+            <div>
+              <p className="mb-2 text-xs font-extrabold uppercase tracking-widest text-cheese-600">
+                Ingredientes
               </p>
-              <p className="card-text">{pizza.desc}</p>
-              <h5>Ingredientes</h5>
-              <ul className="list-group list-group-flush mb-3">
+              <ul className="flex flex-wrap gap-1.5">
                 {pizza.ingredients?.map((ingredient) => (
-                  <li className="list-group-item" key={ingredient}>
+                  <li
+                    key={ingredient}
+                    className="rounded-full bg-cream-100 px-3 py-1 text-xs font-semibold capitalize text-crust-700"
+                  >
                     {ingredient}
                   </li>
                 ))}
               </ul>
-              <Link to="/" className="btn btn-primary me-2">
-                Volver al menú
+            </div>
+
+            <div className="mt-auto flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 rounded-full border border-crust-200 px-5 py-2.5 text-sm font-bold text-crust-800 transition-colors hover:border-cheese-400 hover:bg-cheese-50 hover:text-cheese-700"
+              >
+                <ArrowLeft className="size-4" /> Volver al menú
               </Link>
               <button
                 type="button"
-                className="btn btn-dark"
                 onClick={() => {
                   toast.success("Pizza añadida al carrito");
                   addToCart(pizza.id);
                 }}
+                className="inline-flex items-center gap-2 rounded-full bg-tomato-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-tomato-200 transition-colors hover:bg-tomato-700"
               >
-                Añadir al carrito
+                <ShoppingBasket className="size-4" /> Añadir al carrito
               </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }

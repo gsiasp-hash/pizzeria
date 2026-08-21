@@ -1,13 +1,9 @@
-import React, { Component } from "react";
-
-export default class Footer extends Component {
-  render() {
-    return (
-      <div className="footer bg-dark text-white w-100">
-        <p className="text-center py-3 fw-light">
-          © 2026 - Pizzería Mamma Mia!. - Todos los derechos reservados.
-        </p>
-      </div>
-    );
-  }
+export default function Footer() {
+  return (
+    <footer className="w-full border-t border-cream-300 bg-cream-200/80">
+      <p className="py-5 text-center text-sm font-semibold text-crust-600">
+        © 2026 - Pizzería Mamma Mia!. - Todos los derechos reservados.
+      </p>
+    </footer>
+  );
 }

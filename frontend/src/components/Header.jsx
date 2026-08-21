@@ -1,16 +1,23 @@
-import React, { Component } from "react";
-import "../assets/css/header.css";
+import heroImg from "../assets/img/Header.jpg";
 
-export default class Header extends Component {
-  render() {
-    return (
-      <div className="header d-flex flex-column align-items-center justify-content-center text-white py-5 w-100 h-100">
-        <h1 className="fs-2 pt-5">¡Pizzería Mamma Mia!</h1>
-        <h2 className="text-sm text-center fs-5 fw-light">
+export default function Header() {
+  return (
+    <section className="relative flex h-80 w-full flex-col items-center justify-center overflow-hidden sm:h-96">
+      <img
+        src={heroImg}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-tomato-900/85 via-tomato-700/65 to-cheese-500/55" />
+      <div className="relative z-10 flex flex-col items-center gap-3 px-4 text-center text-cream-50">
+        <h1 className="text-4xl font-extrabold tracking-tight drop-shadow-sm sm:text-5xl">
+          ¡Pizzería Mamma Mia!
+        </h1>
+        <p className="max-w-xl text-base font-semibold text-cream-100 sm:text-lg">
           ¡Tenemos las mejores pizzas que podrás encontrar!
-        </h2>
-        <hr className="w-75 pb-5" />
+        </p>
+        <span className="mt-1 h-1 w-24 rounded-full bg-cheese-400" />
       </div>
-    );
-  }
+    </section>
+  );
 }

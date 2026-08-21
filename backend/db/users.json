@@ -23,5 +23,15 @@
     "email": "prueba@gmail.com",
     "password": "123123",
     "id": "jdDJvOjwwyoLcwlvMcKas"
+  },
+  {
+    "email": "test.cookie@pizzeria.com",
+    "password": "secreto123",
+    "id": "cGzgVeI2DKySFdL6LEGFq"
+  },
+  {
+    "email": "test.cookie2@pizzeria.com",
+    "password": "secreto123",
+    "id": "_F8b8FJOWGXILjJqlypQq"
   }
 ]

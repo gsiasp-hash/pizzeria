@@ -5,49 +5,38 @@ const API_BASE = import.meta.env.VITE_API_URL;
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("token");
-    if (saved) {
-      setToken(saved);
-      setIsLoggedIn(true);
-    }
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!token) {
-        setUser(null);
-        return;
-      }
       try {
         const res = await fetch(`${API_BASE}/api/auth/me`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: "include",
         });
-        const data = await res.json();
         if (res.ok) {
-          setUser(data);
+          setUser(await res.json());
+          setIsLoggedIn(true);
         } else {
           setUser(null);
+          setIsLoggedIn(false);
         }
-      } catch (err) {
+      } catch {
         setUser(null);
+        setIsLoggedIn(false);
+      } finally {
+        setIsCheckingAuth(false);
       }
     };
 
     fetchProfile();
-  }, [token]);
+  }, []);
 
   const request = async (path, body) => {
     const res = await fetch(`${API_BASE}${path}`, {
       method: "POST",
+      credentials: "include",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
@@ -61,9 +50,8 @@ export const UserProvider = ({ children }) => {
       email: email,
       password: password,
     });
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      setToken(data.token);
+    if (data.email) {
+      setUser({ email: data.email });
       setIsLoggedIn(true);
     }
     return data;
@@ -74,24 +62,28 @@ export const UserProvider = ({ children }) => {
       email: email,
       password: password,
     });
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      setToken(data.token);
+    if (data.email) {
+      setUser({ email: data.email });
       setIsLoggedIn(true);
     }
     return data;
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setIsLoggedIn(false);
-    setUser(null);
+  const logout = async () => {
+    try {
+      await fetch(`${API_BASE}/api/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } finally {
+      setUser(null);
+      setIsLoggedIn(false);
+    }
   };
 
   return (
     <UserContext.Provider
-      value={{ token, isLoggedIn, user, login, register, logout }}
+      value={{ user, isLoggedIn, isCheckingAuth, login, register, logout }}
     >
       {children}
     </UserContext.Provider>

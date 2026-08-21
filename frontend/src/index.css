@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+
+  --color-tomato-50: #fef4f2;
+  --color-tomato-100: #fde6e2;
+  --color-tomato-200: #fbccc5;
+  --color-tomato-300: #f8a79c;
+  --color-tomato-400: #f27a69;
+  --color-tomato-500: #ea5540;
+  --color-tomato-600: #d93e30;
+  --color-tomato-700: #b53125;
+  --color-tomato-800: #912a21;
+  --color-tomato-900: #77291f;
+  --color-tomato-950: #41120d;
+
+  --color-basil-50: #f3faef;
+  --color-basil-100: #e3f3da;
+  --color-basil-200: #c9e8bb;
+  --color-basil-300: #a5d78f;
+  --color-basil-400: #7ec063;
+  --color-basil-500: #5ca645;
+  --color-basil-600: #478a34;
+  --color-basil-700: #396d2b;
+  --color-basil-800: #305726;
+  --color-basil-900: #294822;
+  --color-basil-950: #12270d;
+
+  --color-cheese-50: #fdf9ef;
+  --color-cheese-100: #faf0d7;
+  --color-cheese-200: #f5e0ae;
+  --color-cheese-300: #efca7c;
+  --color-cheese-400: #eab354;
+  --color-cheese-500: #e8a33d;
+  --color-cheese-600: #d08428;
+  --color-cheese-700: #ae6521;
+  --color-cheese-800: #8d501f;
+  --color-cheese-900: #75421d;
+  --color-cheese-950: #44210e;
+
+  --color-cream-50: #fffdfa;
+  --color-cream-100: #fff8ee;
+  --color-cream-200: #fdf1e0;
+  --color-cream-300: #f8e5cc;
+  --color-cream-400: #f0d3a8;
+  --color-cream-500: #e5bc7e;
+  --color-cream-600: #d89e58;
+  --color-cream-700: #c07f45;
+  --color-cream-800: #a0683c;
+  --color-cream-900: #825634;
+  --color-cream-950: #452b18;
+
+  --color-crust-50: #f8f6f4;
+  --color-crust-100: #eeeae5;
+  --color-crust-200: #ded6cd;
+  --color-crust-300: #c8bbad;
+  --color-crust-400: #ae9c88;
+  --color-crust-500: #97816a;
+  --color-crust-600: #856953;
+  --color-crust-700: #6e5445;
+  --color-crust-800: #5c473c;
+  --color-crust-900: #4a382f;
+  --color-crust-950: #2d2420;
+}
+
+body {
+  @apply bg-cream-100 font-sans text-crust-950 antialiased;
+}
