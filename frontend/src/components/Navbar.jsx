@@ -37,17 +37,17 @@ export default function Navbar() {
           }}
           className="flex w-full items-center gap-2 rounded-full px-4 py-2 text-sm font-bold text-crust-700 transition-colors hover:bg-cream-200 hover:text-tomato-700"
         >
-          <LogOut className="size-4" /> Logout
+          <LogOut className="size-4" /> Cerrar sesión
         </button>
       )}
       {!isLoggedIn && (
         <NavLink to="/login" className={linkClass} onClick={closeMenu}>
-          Login
+          Iniciar sesión
         </NavLink>
       )}
       {!isLoggedIn && (
         <NavLink to="/register" className={linkClass} onClick={closeMenu}>
-          Register
+          Registrarse
         </NavLink>
       )}
     </>

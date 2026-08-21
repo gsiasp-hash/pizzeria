@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { Minus, Plus, ShoppingBasket } from "lucide-react";
+import { useNavigate } from "react-router";
+import { LogIn, Minus, Plus, ShoppingBasket } from "lucide-react";
 import { TotalContext } from "../contexts/Cart.context";
 import toast from "react-hot-toast";
 import UserContext from "../contexts/User.context";
@@ -7,13 +8,9 @@ import UserContext from "../contexts/User.context";
 export default function Cart() {
   const { cartItems, setCartItems, total } = useContext(TotalContext);
   const { isLoggedIn } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleCheckout = async () => {
-    if (!isLoggedIn) {
-      toast.error("Necesitas iniciar sesión para pagar");
-      return;
-    }
-
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/checkouts`, {
         method: "POST",
@@ -34,6 +31,38 @@ export default function Cart() {
     } catch (err) {
       toast.error(err.message || "Error al procesar el pago");
     }
+  };
+
+  const handlePay = () => {
+    if (cartItems.length === 0) {
+      toast.error("Tu carrito está vacío, agrega pizzas para poder pagar");
+      return;
+    }
+    if (!isLoggedIn) {
+      toast.custom(
+        (t) => (
+          <div className="flex items-center gap-3 rounded-2xl border border-cream-200 bg-white p-4 shadow-xl shadow-crust-950/10">
+            <LogIn className="size-5 shrink-0 text-tomato-600" />
+            <p className="text-sm font-bold text-crust-950">
+              Inicia sesión para continuar con el pago
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                toast.dismiss(t.id);
+                navigate("/login");
+              }}
+              className="cursor-pointer ml-auto shrink-0 rounded-full bg-tomato-600 px-4 py-1.5 text-xs font-bold text-white transition-colors hover:bg-tomato-700"
+            >
+              Iniciar sesión
+            </button>
+          </div>
+        ),
+        { duration: 6000 },
+      );
+      return;
+    }
+    handleCheckout();
   };
 
   const handleIncrement = (id) => {
@@ -127,14 +156,7 @@ export default function Cart() {
         </p>
         <button
           type="button"
-          onClick={
-            isLoggedIn
-              ? handleCheckout
-              : () =>
-                  toast.info(
-                    "Por favor, inicia sesión para continuar con el pago",
-                  )
-          }
+          onClick={handlePay}
           className={`inline-flex items-center gap-2 rounded-full px-8 py-3 text-sm font-bold text-white shadow-md transition-colors ${
             isLoggedIn
               ? "bg-tomato-600 shadow-tomato-200 hover:bg-tomato-700"
