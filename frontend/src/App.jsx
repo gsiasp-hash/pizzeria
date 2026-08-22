@@ -14,6 +14,7 @@ import { PizzasProvider } from "./contexts/Pizzas.provider";
 import UserContext, { UserProvider } from "./contexts/User.context";
 import { Toaster } from "react-hot-toast";
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function AuthChecking() {
   return (
@@ -95,7 +96,8 @@ function App() {
           </PizzasProvider>
         </UserProvider>
       </div>
-      <Analytics/>
+      <Analytics />
+      <SpeedInsights />
     </BrowserRouter>
   );
 }
