@@ -1,4 +1,4 @@
-# 🍕 Pizzería Mamma Mia
+# 🍕 Pizzería Gino
 
 Proyecto **full-stack** de una pizzería con catálogo de pizzas, carrito de compras y autenticación de usuarios basada en JWT.
 
