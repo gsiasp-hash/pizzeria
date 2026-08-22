@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { nanoid } from "nanoid";
 import { authModel } from "../models/auth.model.js";
 import { isValidEmail } from "../utils/validators/email.validate.js";
+import { hashPassword, verifyPassword } from "../utils/passwords/password.util.js";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -37,7 +38,7 @@ const login = async (req, res) => {
       return res.status(400).json({ error: "Usuario no encontrado" });
     }
 
-    if (user.password !== password) {
+    if (!(await verifyPassword(password, user.password))) {
       return res.status(400).json({ error: "Contraseña incorrecta" });
     }
 
@@ -74,7 +75,8 @@ const register = async (req, res) => {
     if (user) {
       return res.status(400).json({ error: "El usuario ya existe" });
     }
-    const newUser = { email, password, id: nanoid() };
+    const hashedPassword = await hashPassword(password);
+    const newUser = { email, password: hashedPassword, id: nanoid() };
     await authModel.addUser(newUser);
 
     const payload = { email, id: newUser.id };

@@ -5,7 +5,7 @@ API para consumir un servicio de Auth con JWT.
 ## Instalación
 
 ```sh
-npm installtengo el
+npm install
 ```
 
 ## Uso
@@ -72,6 +72,15 @@ GET /api/auth/me
 
 Para obtener el token JWT, se debe hacer una petición a `/api/auth/login` o a `/api/auth/register` con el body correspondiente.
 
+Cuenta demo incluida en `db/users.json`:
+
+```json
+{
+  "email": "test@example.com",
+  "password": "123123"
+}
+```
+
 El token JWT se debe enviar en el header `Authorization` de la siguiente manera:
 
 ```sh
@@ -91,4 +100,14 @@ await fetch("http://localhost:5000/api/checkout", {
     cart: carrito,
   }),
 });
+```
+
+## Seguridad de contraseñas
+
+Las contraseñas se almacenan hasheadas con `scrypt` (`node:crypto`), con salt aleatoria por usuario y comparación en tiempo constante — nunca en texto plano.
+
+Si tienes un `db/users.json` antiguo con contraseñas planas, migralo con:
+
+```sh
+node scripts/migrate-users.mjs
 ```

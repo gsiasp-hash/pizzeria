@@ -1,37 +1,12 @@
 [
   {
-    "email": "test@test.com",
-    "password": "123123",
-    "id": "UYz_2Vy9rNw7uELQ7AZ8D"
+    "email": "test@example.com",
+    "password": "scrypt:ac09e1b101da57d8a465afc99e6e01e6:667cbe47e9cc330674028ff8971f7a17ac21b269ee0a26930abc34250c26e18666a4e8696b887fb60a95c43effbc053aaec6e4e6da910be1ef49764ac1622943",
+    "id": "seed-demo-user-0001"
   },
   {
-    "email": "g.siasp@gmail.com",
-    "password": "123123",
-    "id": "0fLq-GAeM-MxERthSoske"
-  },
-  {
-    "email": "hola@gmail.com",
-    "password": "123123",
-    "id": "5O6fCzKmaeosVlgMOgiTl"
-  },
-  {
-    "email": "ya@gmail.com",
-    "password": "123123",
-    "id": "Cn8pgOHHB7_rgY9Dyz5zN"
-  },
-  {
-    "email": "prueba@gmail.com",
-    "password": "123123",
-    "id": "jdDJvOjwwyoLcwlvMcKas"
-  },
-  {
-    "email": "test.cookie@pizzeria.com",
-    "password": "secreto123",
-    "id": "cGzgVeI2DKySFdL6LEGFq"
-  },
-  {
-    "email": "test.cookie2@pizzeria.com",
-    "password": "secreto123",
-    "id": "_F8b8FJOWGXILjJqlypQq"
+    "email": "nuevo@test.com",
+    "password": "scrypt:871619582b4146033bafdcf57eade921:ab900008fec12f3ad4ca92eaf63aff74dab98102ec0d8e977dc1f91136efde20c1bb854b19f7fb9d19cc6faefcfe6edbade46b8d2cdee8962c4b91b03047c8c5",
+    "id": "Dhvjfr-d_2r2UYWP77Pi9"
   }
 ]
