@@ -123,7 +123,7 @@ export default function Pizza() {
                   toast.success("Pizza añadida al carrito");
                   addToCart(pizza.id);
                 }}
-                className="inline-flex items-center gap-2 rounded-full bg-tomato-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-tomato-200 transition-colors hover:bg-tomato-700"
+                className="cursor-pointer inline-flex items-center gap-2 rounded-full bg-tomato-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-tomato-200 transition-colors hover:bg-tomato-700"
               >
                 <ShoppingBasket className="size-4" /> Añadir al carrito
               </button>

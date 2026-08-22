@@ -58,7 +58,7 @@ export default function CardPizza({ name, price, ingredients, img, desc, id }) {
               addToCart(id);
               toast.success("Pizza añadida al carrito");
             }}
-            className="inline-flex items-center gap-1.5 rounded-full bg-tomato-600 px-4 py-2 text-sm font-bold text-white shadow-sm shadow-tomato-200 transition-colors hover:bg-tomato-700"
+            className="cursor-pointer inline-flex items-center gap-1.5 rounded-full bg-tomato-600 px-4 py-2 text-sm font-bold text-white shadow-sm shadow-tomato-200 transition-colors hover:bg-tomato-700"
           >
             Añadir <Plus className="size-4" />
           </button>
